@@ -63,8 +63,9 @@ class LoginPage extends Page {
    }
 
    async submitReg(){
-       await  this.regSubmitBtn.click()
-       await this.authForm.isDisplayed();
+       await  this.regSubmitBtn.click();
+       await expect (await this.authForm).toBeDisplayed();
+
    }
 
 
