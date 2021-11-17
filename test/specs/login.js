@@ -1,19 +1,18 @@
-import loginPage from '../pageobjects/login.page';
 import LoginPage from '../pageobjects/login.page';
+import resources from '../resources';
 
 
 describe('Login Page', () => {
 
     before(async () => {
         await LoginPage.open();
-        await browser.pause(1000);
 
     });
 
 
 
     after(() => {
-        browser.url('https://www.onliner.by/');
+        browser.url(resources.url);
     });
 
     afterEach(() => {
@@ -23,8 +22,9 @@ describe('Login Page', () => {
 
     describe(' Onliner tests', () => {
         it('should login with valid credentials', async () => {
-            await LoginPage.login('nastyadomnich071@gmail.com', 'Lena5530718');
-            await loginPage.logOff();
+            await LoginPage.login(resources.username, resources.password);
+            await LoginPage.logOff();
+    
 
 
         });
@@ -32,11 +32,11 @@ describe('Login Page', () => {
 
    
         it('should registrated with valid credentials', async () => {
-            await LoginPage.openRegForm()
-            await loginPage.generateEmail();
-            await loginPage.generatePassword();
-            await loginPage.submitReg();
-            browser.pause(10000);
+            await LoginPage.openRegForm();
+            await LoginPage.generateEmail();
+            await LoginPage.generatePassword();
+            await LoginPage.submitReg();
+  
 
         });
     
