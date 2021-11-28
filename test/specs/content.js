@@ -38,7 +38,8 @@ describe('Content Page', () => {
         it ('filtering catalog page', async() => {
             await ContentPage.navigateToLaptop();
             await ContentPage.selectFilter();
-            browser.pause(5000);
+            browser.pause(10000);
+
 
 
 

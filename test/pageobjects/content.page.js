@@ -64,11 +64,24 @@ async navigateToLaptop(){
 
 async selectFilter(){
 
-    // const checkboxesLabels = browser.elements('.mwc-checkbox-custom');
-    // checkboxesLabels.value.forEach((label) => label.click());
+    //const checkboxesLabels = await browser.$('//input[@type="checkbox"][contains(@value, "asus")]');
+  // const checkboxesLabels = await browser.$(`//label[@class="schema-filter__checkbox-item"][contains(@data-bind, "css: {'schema-filter__checkbox-item_disabled': facet.isDisabledLabel(item.id)}")]/span/input[@value="asus"]`);
+   // const checkboxesLabels = await browser.$('//input[@class="i-checkbox__real"]');
+    const checkboxesLabels = await browser.$$('//label[@class="schema-filter__checkbox-item"]');
+   //const checkboxesLabels = await browser.$('input[type=checkbox][value=asus]');
 
-    await this.asus.click()
-    browser.pause(10000)
+   //const  checkboxesLabels =  await browser.getAttributeSelector('schema-filter__checkbox-item', 'asus');
+     await checkboxesLabels.scrollIntoView();
+     browser.pause(50000)
+
+
+    //await checkboxesLabels.isDisplayed()
+    //await checkboxesLabels.isClickable()
+   await checkboxesLabels.click();
+
+
+   //await this.asus.click()
+    browser.pause(50000)
    // await this.asus.isSelected()
 }
 
