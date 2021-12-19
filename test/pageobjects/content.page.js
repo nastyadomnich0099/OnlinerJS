@@ -16,7 +16,6 @@ get computerAndNetwork() {return $('//li [@data-id="2"]')}
 get monitor() {return $('//div[contains (text (), "Ноутбуки, компьютеры, мониторы")]')}
 get laptop() {return $('//a[contains(@href, "/notebook")]//span[contains(text(), "Ноутбуки ")]')}
 get asus() {return $('//ul//label[.//input[@type="checkbox" and @value="asus"]]')}
-//get asusLabel() {return $('//span[@class="schema-tags__text"]')}
 get asusLabel() {return $('//div[@title="Производитель"]/span[@class="schema-tags__text"]')}
 get matrixFreq1() {return $('//*[@class="schema-filter__label" and contains(.,"Частота матрицы")]/following-sibling::*//div[contains(@class,"filter-control")][1]')}
 get matrixFreq2() {return $('//*[@class="schema-filter__label" and contains(.,"Частота матрицы")]/following-sibling::*//div[contains(@class,"filter-control")][2]')}
@@ -29,7 +28,12 @@ get sortfilter() {return $('//select[@class="input-style__real"]')}
 get priceOption() {return $('//select[@class="input-style__real"]/option[@value="price:asc"]')}
 //get backetLabel() {return $('//div[@class="offers-list__item offers-list__item_highlighted"][2]//a[contains(text(),"В корзину")]')}
 get backetLabel() {return $('//*[@class="offers-list__item offers-list__item_highlighted"]/following::*//div[contains(@class,"helpers_hide_tablet")]/a[contains(@class, "button-style_expletive")]')}
-//*[@class="offers-list__item offers-list__item_highlighted"][1]/parent::*//a[contains(@class, 'button-style_expletive')]
+get backetButton() {return $('//a[@class="auth-bar__item auth-bar__item--cart"]')}
+get checkout() {return $('//a[contains(@class, "cart-form__button button-style_primary")]')}
+get streetField() {return $('//div[@class="cart-form__field"]/following::*/input[contains(@class, "auth-form__input auth-form__input_width_full")]')}
+get houseField() {return $('//input[contains(@class,"cart-form__input_nonadaptive")]')}
+get nameField() {return $('//input[contains(@class,"cart-form__input_width_ss")]')}
+
 
 
 
@@ -108,9 +112,6 @@ async selectFilter(){
     await this.superPrice.click();
     await this.superPriceLabel.isDisplayed();
     await this.asus.click();
-    
-   // await this.asus.scrollIntoView();
-   // await this.asus.click();
     browser.pause(5000)
 }
 
@@ -122,21 +123,24 @@ async redirectToProposal(){
     await this.sortfilter.click()
     await this.priceOption.click()
     //await this.backetLabel.scrollIntoView()
-    await this.backetLabel.doubleClick()
-    
-   
-
-
-
-    browser.pause(10000);
-
-
-
-////a[contains(@class,"button-style ")]
-
-   
 }
 
+ async redirectToBacket(){   
+    await this.backetLabel.click()
+    await this.backetButton.scrollIntoView()
+    await this.backetButton.click()
+    await this.checkout.click()
+    
+
+}
+
+async fillInForm(street,house, firstName, lastName){
+    await this.streetField.setValue(street)
+    await this.houseField.setValue(house)
+    await this.nameField.setValue(firstName)
+    await this.nameField.setValue(lastName)
+    browser.pause(5000);
+}
 
 
 

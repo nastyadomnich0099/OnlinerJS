@@ -50,7 +50,11 @@ describe('Content Page', () => {
              await   ContentPage.searchUniqProduct(resources.searchValue1);
             await ContentPage.openSearchResult2();
             await ContentPage.redirectToProposal();
-            
+            await ContentPage.redirectToBacket();
+           await ContentPage.fillInForm(resources.street, resources.house, resources.firstName, resources.lastName);
+
+
+           browser.pause(50000)
         })
 
 
