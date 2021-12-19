@@ -15,7 +15,26 @@ get catalogButton() {return $('//span[contains(text(), "Каталог")][@class
 get computerAndNetwork() {return $('//li [@data-id="2"]')}
 get monitor() {return $('//div[contains (text (), "Ноутбуки, компьютеры, мониторы")]')}
 get laptop() {return $('//a[contains(@href, "/notebook")]//span[contains(text(), "Ноутбуки ")]')}
-get asus() {return $('//input[@type="checkbox"][contains(@value, "asus")][1]')}
+get asus() {return $('//ul//label[.//input[@type="checkbox" and @value="asus"]]')}
+//get asusLabel() {return $('//span[@class="schema-tags__text"]')}
+get asusLabel() {return $('//div[@title="Производитель"]/span[@class="schema-tags__text"]')}
+get matrixFreq1() {return $('//*[@class="schema-filter__label" and contains(.,"Частота матрицы")]/following-sibling::*//div[contains(@class,"filter-control")][1]')}
+get matrixFreq2() {return $('//*[@class="schema-filter__label" and contains(.,"Частота матрицы")]/following-sibling::*//div[contains(@class,"filter-control")][2]')}
+get matrixFreqLabel() {return $('//span[@class="schema-tags__text"]')}
+get superPrice() {return $('//label[.//span[@class="schema-filter__hot schema-filter__hot_specific"]]')};
+get superPriceLabel() {return $('//div[@class="schema-product__hot"]')}
+
+get proposal() {return $('//a[contains(@href,"://catalog.onliner.by/scales/xiaomi/mismartscale2new/prices")]/span[text()="Предложения продавцов"]')}
+get sortfilter() {return $('//select[@class="input-style__real"]')}
+get priceOption() {return $('//select[@class="input-style__real"]/option[@value="price:asc"]')}
+//get backetLabel() {return $('//div[@class="offers-list__item offers-list__item_highlighted"][2]//a[contains(text(),"В корзину")]')}
+get backetLabel() {return $('//*[@class="offers-list__item offers-list__item_highlighted"]/following::*//div[contains(@class,"helpers_hide_tablet")]/a[contains(@class, "button-style_expletive")]')}
+//*[@class="offers-list__item offers-list__item_highlighted"][1]/parent::*//a[contains(@class, 'button-style_expletive')]
+
+
+
+
+//a[position()=2]
 
 async openContent(){
     
@@ -54,6 +73,17 @@ await this.serchResultName.isDisplayed()
 
 }
 
+async openSearchResult2(){
+    const frame1 = await browser.$("//iframe[contains(@class,'modal')]");
+    await browser.switchToFrame(frame1);
+    //await this.catalogFilter.click();
+    await this.searchResult.isDisplayed();
+    await this.searchResult.click()
+    await this.serchResultName.isDisplayed()
+    
+    
+    }
+
 async navigateToLaptop(){
     await this.catalogButton.click()
     await this.computerAndNetwork.click()
@@ -64,25 +94,47 @@ async navigateToLaptop(){
 
 async selectFilter(){
 
-    //const checkboxesLabels = await browser.$('//input[@type="checkbox"][contains(@value, "asus")]');
-  // const checkboxesLabels = await browser.$(`//label[@class="schema-filter__checkbox-item"][contains(@data-bind, "css: {'schema-filter__checkbox-item_disabled': facet.isDisabledLabel(item.id)}")]/span/input[@value="asus"]`);
-   // const checkboxesLabels = await browser.$('//input[@class="i-checkbox__real"]');
-    const checkboxesLabels = await browser.$$('//label[@class="schema-filter__checkbox-item"]');
-   //const checkboxesLabels = await browser.$('input[type=checkbox][value=asus]');
-
-   //const  checkboxesLabels =  await browser.getAttributeSelector('schema-filter__checkbox-item', 'asus');
-     await checkboxesLabels.scrollIntoView();
      browser.pause(50000)
+    
+    await this.asus.scrollIntoView();
+    await this.asus.click();
+    await this.asusLabel.isDisplayed();
+    await this.matrixFreq1.scrollIntoView();
+    await this.matrixFreq1.selectByIndex(3);
+    await this.matrixFreq2.selectByIndex(5);
+    await this.matrixFreqLabel.scrollIntoView();
+    await this.matrixFreqLabel.isDisplayed();
+    await this.superPrice.scrollIntoView();
+    await this.superPrice.click();
+    await this.superPriceLabel.isDisplayed();
+    await this.asus.click();
+    
+   // await this.asus.scrollIntoView();
+   // await this.asus.click();
+    browser.pause(5000)
+}
 
 
-    //await checkboxesLabels.isDisplayed()
-    //await checkboxesLabels.isClickable()
-   await checkboxesLabels.click();
+async redirectToProposal(){
+
+    await this.proposal.click()
+    await this .sortfilter.scrollIntoView()
+    await this.sortfilter.click()
+    await this.priceOption.click()
+    //await this.backetLabel.scrollIntoView()
+    await this.backetLabel.doubleClick()
+    
+   
 
 
-   //await this.asus.click()
-    browser.pause(50000)
-   // await this.asus.isSelected()
+
+    browser.pause(10000);
+
+
+
+////a[contains(@class,"button-style ")]
+
+   
 }
 
 

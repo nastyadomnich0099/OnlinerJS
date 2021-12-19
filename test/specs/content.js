@@ -39,19 +39,25 @@ describe('Content Page', () => {
             await ContentPage.navigateToLaptop();
             await ContentPage.selectFilter();
             browser.pause(10000);
-
-
-
-
-
+            browser.pause(50000)
             
 
         }
         )
+
+
+        it('should place an order before payment', async() =>{
+             await   ContentPage.searchUniqProduct(resources.searchValue1);
+            await ContentPage.openSearchResult2();
+            await ContentPage.redirectToProposal();
+            
+        })
+
+
+        })
 
         
 
 
 
     });
-})
