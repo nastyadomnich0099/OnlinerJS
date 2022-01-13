@@ -9,8 +9,6 @@ describe('Login Page', () => {
 
     });
 
-
-
     after(() => {
         browser.url(resources.url);
     });
@@ -24,27 +22,14 @@ describe('Login Page', () => {
         it('should login with valid credentials', async () => {
             await LoginPage.login(resources.username, resources.password);
             await LoginPage.logOff();
-    
-
-
         });
 
-
-   
         it('should registrated with valid credentials', async () => {
             await LoginPage.openRegForm();
             await LoginPage.generateEmail();
             await LoginPage.generatePassword();
             await LoginPage.submitReg();
-  
-
         });
 
-      
-    
-
-
-
-
-})
+    })
 })

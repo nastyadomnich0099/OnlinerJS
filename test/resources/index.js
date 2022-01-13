@@ -7,7 +7,8 @@ export default {
     street: 'Новая',
     house: '10',
     firstName: 'Вика',
-    lastName: 'Домнич'
+    lastName: 'Домнич',
+    mobile: '291234567'
     
 
 
