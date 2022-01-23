@@ -21,11 +21,10 @@ describe('Content Page', () => {
     });
 
     describe(' Onliner tests', () => {
-        it('should login with valid credentials', async () => {
-            await LoginPage.login(resources.username, resources.password);
-            browser.pause(5000)
-            await ContentPage.openContent();
-        });
+        // it('should login with valid credentials', async () => {
+        //     await LoginPage.login(resources.username, resources.password);
+        //     await ContentPage.openContent();
+        // });
 
         it('search of items', async () => {
             await ContentPage.search(resources.searchValue);
@@ -44,8 +43,8 @@ describe('Content Page', () => {
             await ContentPage.openSearchResult2();
             await ProductPage.redirectToProposal();
             await BacketPage.redirectToBacket();
-            await OrderPage.fillInForm(resources.street, resources.house, resources.firstName, resources.lastName, resources.mobile);
-            await OrderPage.redirectToPayment();
+   //         await OrderPage.fillInForm(resources.street, resources.house, resources.firstName, resources.lastName, resources.mobile);
+         // await OrderPage.redirectToPayment();
         })
     })
 });

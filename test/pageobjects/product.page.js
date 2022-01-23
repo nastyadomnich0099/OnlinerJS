@@ -21,13 +21,11 @@ class ProductPage extends Page {
 
 
     async redirectToProposal() {
-        browser.pause(5000)
         await this.proposal.click()
         await this.sortfilterView.scrollIntoView()
         await this.sortfilter.click()
         await this.priceOption.click()
-        await this.pricelabel.isDisplayed();
-      //  browser.pause(5000)
+        await expect (await this.pricelabel).toBeDisplayed();
     }
 
 }

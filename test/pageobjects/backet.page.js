@@ -7,17 +7,16 @@ class BacketPage extends Page {
         return $('//div[@class="offers-list__part offers-list__part_price"]/following-sibling::*//div[contains(@class,"helpers_hide_tablet")]/a[contains(@class, "button-style_expletive")]')
     }
     get backetButton() {
-        return $('//a[@class="b-top-profile__cart"]')
+     //   return $('//a[@class="b-top-profile__cart"]')
+        return $('//a[@class="auth-bar__item auth-bar__item--cart"]')
     }
-
-
 
     get checkoutLink() {
         return $('//a[contains(@class, "cart-form__button button-style")]')
     }
 
     get cartForm() {
-        return $('//div[contains(@class, "cart-form__flex")]')
+        return $('//div[contains(@class, "cart-form__body")]')
     }
 
 
@@ -27,7 +26,7 @@ class BacketPage extends Page {
         await this.backetButton.scrollIntoView()
         await this.backetButton.click()
         await this.checkoutLink.click()
-        await this.cartForm.isDisplayed()
+        await expect(await this.cartForm).toBeDisplayed()
     }
 
 

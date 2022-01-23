@@ -27,17 +27,16 @@ class CatalogPage extends Page {
     async selectFilter() {
         browser.waitUntil(await this.asusFilter.scrollIntoView());
         await this.asusFilter.click();
-        await this.asusLabel.isDisplayed();
+        await expect(await this.asusLabel).toBeDisplayed();
         await this.matrixFrequency1.scrollIntoView();
         await this.matrixFrequency1.selectByIndex(3);
         await this.matrixFrequency2.selectByIndex(5);
         await this.matrixFrequencyLabel.scrollIntoView();
-        await this.matrixFrequencyLabel.isDisplayed();
+        await expect (await this.matrixFrequencyLabel).toBeDisplayed();
         await this.superPrice.scrollIntoView();
         await this.superPrice.click();
-        await this.superPriceLabel.isDisplayed();
+        await expect(await this.superPriceLabel).toBeDisplayed();
         await this.asusFilter.click();
-        browser.pause(5000)
     }
 }
 

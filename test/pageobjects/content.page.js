@@ -70,7 +70,6 @@ class ContentPage extends Page {
 
     async deleteSearchResult() {
         await this.modalSearchField.clearValue();
-        browser.pause(5000)
     }
 
     async searchUniqProduct(searchValue1) {
@@ -86,8 +85,6 @@ class ContentPage extends Page {
         //await this.catalogFilter.click()
         browser.waitUntil(await expect(await this.searchResult2).toBeDisplayed(), 5000);
     }
-
-
 
     async openSearchResult() {
         await this.searchResult2.click()
