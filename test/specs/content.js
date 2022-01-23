@@ -31,7 +31,7 @@ describe('Content Page', () => {
             await ContentPage.search(resources.searchValue);
             await ContentPage.deleteSearchResult();
             await ContentPage.searchUniqProduct(resources.searchValue1);
-            await ContentPage.openSearchResult();
+           await ContentPage.openSearchResult();
         })
 
         it('filtering catalog page', async () => {
@@ -40,12 +40,12 @@ describe('Content Page', () => {
         })
 
         it('should place an order before payment', async () => {
-            await ContentPage.searchUniqProduct(resources.searchValue1);
+          await ContentPage.searchUniqProduct2(resources.searchValue1);
             await ContentPage.openSearchResult2();
             await ProductPage.redirectToProposal();
             await BacketPage.redirectToBacket();
             await OrderPage.fillInForm(resources.street, resources.house, resources.firstName, resources.lastName, resources.mobile);
-            //   await OrderPage.redirectToPayment();
+              await OrderPage.redirectToPayment();
         })
     })
 });

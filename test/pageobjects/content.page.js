@@ -11,19 +11,33 @@ class ContentPage extends Page {
     get searchField() {
         return $('//input[@class="fast-search__input"]')
     }
+
+    get fastModalSearchField() {
+        return $('//input[@class="fast-search__input"]');
+    }
+    get modalSearchField() {
+        return $('//input[contains(@class,"search__input" ) and (@placeholder="Поиск")]')
+    }
+
     get searchResult1() {
-        return $('//div[@class="news__data"]')
+        return $('//a[@class="product__title-link" and contains(.,"Карта памяти")]')
+    }
+
+
+    get searchResult2() {
+        return $('//a[@class="product__title-link" and contains(.,"Напольные весы Xiaomi Mi Smart Scale 2")]')
     }
 
     get catalogFilter() {
-        return $('//div[@class="search__tabs-item active"]')
+        return $('//div[contains(@class,"search__tabs-item active")]')
     }
-    //get frame1() {return $("//iframe[contains(@class,'modal')]")}
+
     get searchResult() {
-        return $('//div[@class="result__item result__item_product"]')
+        return $('//a[@class="product__title-link"]')
     }
+
     get serchResultName() {
-        return $('//h1[contains(text()," Напольные весы Xiaomi Mi Smart Scale 2")] ')
+        return $('//h1[contains(text()," Напольные весы Xiaomi Mi Smart Scale 2")]')
     }
     get catalogButton() {
         return $('//span[contains(text(), "Каталог")][@class="b-main-navigation__text"]')
@@ -38,42 +52,53 @@ class ContentPage extends Page {
         return $('//a[contains(@href, "/notebook")]//span[contains(text(), "Ноутбуки ")]')
     }
 
+    get frame1(){
+        return $('//iframe[contains(@class,"modal")]')
+    }
+
     async openContent() {
         await this.autoSection1.scrollIntoView();
         await this.article.click();
-
     }
 
     async search(searchValue) {
         await this.searchField.setValue(searchValue)
-        await this.searchResult1.isDisplayed()
+        const iframeSection = await browser.$("//iframe[contains(@class,'modal')]");
+        await browser.switchToFrame(iframeSection);
+ await this.catalogFilter.click()
+        browser.waitUntil(await expect(await this.searchResult1).toBeDisplayed(), 5000);
     }
 
     async deleteSearchResult() {
-        await this.searchField.clearValue();
-        browser.pause(50000)
+        await this.modalSearchField.clearValue();
+        browser.pause(5000)
     }
 
     async searchUniqProduct(searchValue1) {
-        await this.searchField.setValue(searchValue1);
+        await this.modalSearchField.setValue(searchValue1);
+        browser.waitUntil(await expect(await this.searchResult2).toBeDisplayed(), 5000);
+
     }
 
-    async openSearchResult() {
+    async searchUniqProduct2(searchValue1) {
+        await this.searchField.setValue(searchValue1)
         const frame1 = await browser.$("//iframe[contains(@class,'modal')]");
         await browser.switchToFrame(frame1);
-        await this.catalogFilter.click();
-        await this.searchResult.isDisplayed();
-        await this.searchResult.click()
-        await this.serchResultName.isDisplayed()
+        //await this.catalogFilter.click()
+        browser.waitUntil(await expect(await this.searchResult2).toBeDisplayed(), 5000);
+    }
+
+
+
+    async openSearchResult() {
+        await this.searchResult2.click()
+        browser.waitUntil(await expect(await this.serchResultName).toBeDisplayed(), 5000)
     }
 
     async openSearchResult2() {
-        const frame1 = await browser.$("//iframe[contains(@class,'modal')]");
-        await browser.switchToFrame(frame1);
-        //await this.catalogFilter.click();
         await this.searchResult.isDisplayed();
         await this.searchResult.click()
-        await this.serchResultName.isDisplayed()
+        await expect(await this.serchResultName).toBeDisplayed()
     }
 
     async navigateToLaptop() {

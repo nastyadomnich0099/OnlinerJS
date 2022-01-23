@@ -10,6 +10,8 @@ class BacketPage extends Page {
         return $('//a[@class="b-top-profile__cart"]')
     }
 
+
+
     get checkoutLink() {
         return $('//a[contains(@class, "cart-form__button button-style")]')
     }
