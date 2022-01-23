@@ -23,7 +23,6 @@ class ContentPage extends Page {
         return $('//a[@class="product__title-link" and contains(.,"Карта памяти")]')
     }
 
-
     get searchResult2() {
         return $('//a[@class="product__title-link" and contains(.,"Напольные весы Xiaomi Mi Smart Scale 2")]')
     }
@@ -52,9 +51,9 @@ class ContentPage extends Page {
         return $('//a[contains(@href, "/notebook")]//span[contains(text(), "Ноутбуки ")]')
     }
 
-    get frame1(){
-        return $('//iframe[contains(@class,"modal")]')
-    }
+    // get frame1(){
+    //     return $('//iframe[contains(@class,"modal")]')
+    // }
 
     async openContent() {
         await this.autoSection1.scrollIntoView();
@@ -65,7 +64,7 @@ class ContentPage extends Page {
         await this.searchField.setValue(searchValue)
         const iframeSection = await browser.$("//iframe[contains(@class,'modal')]");
         await browser.switchToFrame(iframeSection);
- await this.catalogFilter.click()
+        await this.catalogFilter.click()
         browser.waitUntil(await expect(await this.searchResult1).toBeDisplayed(), 5000);
     }
 
